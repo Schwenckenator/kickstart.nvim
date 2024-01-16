@@ -1,3 +1,4 @@
+
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -31,6 +32,7 @@ require('lazy').setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
+    -- cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(vim.fn.getpid())}
   },
 
   {

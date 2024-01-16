@@ -42,8 +42,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 -- paste without copy
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
--- paste from system clipboard
-vim.keymap.set("n", "<leader>p", "\"+p")
+-- -- paste from system clipboard
+-- vim.keymap.set("n", "<leader>p", "\"+p")
 
 -- yank to system clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
