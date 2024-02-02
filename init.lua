@@ -190,16 +190,19 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    -- Theme 
+   'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     lazy = false,
     config = function()
-      require('onedark').setup {
-        -- Set a style preset. 'dark' is default.
-        style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
-      }
-      require('onedark').load()
+      require('catppuccin').setup({
+        flavour='mocha',
+        transparent_background = true,
+      })
+
+      -- setup must be called before loading
+      vim.cmd.colorscheme "catppuccin"
     end,
   },
 
@@ -282,7 +285,14 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+-- Make window contain at least this many lines on each side of the file
+vim.opt.scrolloff = 8
+
+-- Disable line wrap
+vim.opt.wrap = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -290,7 +300,7 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -321,15 +331,30 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Worst place in the world??
+vim.keymap.set("n", "Q", "<nop>")
+
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- I disabled word wrap, so I don't need this
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Centre page on page jumps
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = '1/2 page down' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = '1/2 page up' })
+
+-- Delete to void (don't cut)
+vim.keymap.set({'n', 'v'}, '<leader>d', '"_d')
+
+-- Yank to system clipboard
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
