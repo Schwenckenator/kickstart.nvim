@@ -191,7 +191,7 @@ require('lazy').setup({
 
   {
     -- Theme 
-   'catppuccin/nvim',
+    'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
     lazy = false,
@@ -265,7 +265,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -275,6 +275,12 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+  {
+    "ThePrimeagen/harpoon",
+    name = 'harpoon',
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -508,14 +514,15 @@ vim.defer_fn(function()
           ['[]'] = '@class.outer',
         },
       },
+      -- I don't wanna swap things
       swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
-        },
+        enable = false,
+        -- swap_next = {
+        --   ['<leader>a'] = '@parameter.inner',
+        -- },
+        -- swap_previous = {
+        --   ['<leader>A'] = '@parameter.inner',
+        -- },
       },
     },
   }
@@ -583,6 +590,16 @@ require('which-key').register({
   ['<leader>'] = { name = 'VISUAL <leader>' },
   ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
+
+-- [[Configure Harpoon]]
+local harpoon = require('harpoon')
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-f>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
