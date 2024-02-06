@@ -88,7 +88,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -190,14 +190,14 @@ require('lazy').setup({
   },
 
   {
-    -- Theme 
+    -- Theme
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
     lazy = false,
     config = function()
       require('catppuccin').setup({
-        flavour='mocha',
+        flavour = 'mocha',
         transparent_background = true,
       })
 
@@ -356,11 +356,11 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = '1/2 page down' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = '1/2 page up' })
 
 -- Delete to void (don't cut)
-vim.keymap.set({'n', 'v'}, '<leader>d', '"_d')
+vim.keymap.set({ 'n', 'v' }, '<leader>vd', '"_d', { desc = '[D]elete to void' })
+vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[C]hange to void' })
 
 -- Yank to system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
-
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -582,6 +582,7 @@ require('which-key').register {
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+  ['<leader>v'] = { name = '[V]oid', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
