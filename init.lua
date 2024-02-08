@@ -275,12 +275,25 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+
+  -- Harpoon, tag main files for easy opening
   {
     "ThePrimeagen/harpoon",
     name = 'harpoon',
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
-  }
+  },
+  -- Lazygit, run lazygit in neovim
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>', { desc = "Open Lazy[g]it" })
+    end
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -631,8 +644,12 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+  -- React / Svelte
+  tsserver = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
+  eslint = {},
+  svelte = {},
 
   lua_ls = {
     Lua = {
