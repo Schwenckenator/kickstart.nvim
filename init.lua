@@ -283,6 +283,7 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
+
   -- Lazygit, run lazygit in neovim
   {
     "kdheepak/lazygit.nvim",
@@ -294,6 +295,34 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>', { desc = "Open Lazy[g]it" })
     end
   },
+
+  -- Add project wide error / Todo checking
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+    config = function()
+      vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+      vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+      vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+      vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+      vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+      vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+    end
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {},
+    config = function()
+      vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next [T]odo comment" })
+      vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous [T]odo comment" })
+    end
+  },
+
 }, {})
 
 -- [[ Setting options ]]
