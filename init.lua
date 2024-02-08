@@ -359,11 +359,19 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = '1/2 page down' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = '1/2 page up' })
 
 -- Delete to void (don't cut)
-vim.keymap.set({ 'n', 'v' }, '<leader>vd', '"_d', { desc = '[D]elete to void' })
-vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[C]hange to void' })
+vim.keymap.set({ 'n', 'v' }, '<leader>vd', '"_d', { desc = '[V]oid [D]elete' })
+vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[V]oid [C]hange' })
 
 -- Yank to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' })
+
+-- Insert/Append at current indent on empty lines
+local function indentOnEmpty(defaultMap)
+  return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
+end
+
+vim.keymap.set('n', 'i', function() return indentOnEmpty('i') end, { expr = true, noremap = true })
+vim.keymap.set('n', 'a', function() return indentOnEmpty('a') end, { expr = true, noremap = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -560,7 +568,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -597,13 +605,13 @@ require('which-key').register({
 
 -- [[Configure Harpoon]]
 local harpoon = require('harpoon')
-vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
-vim.keymap.set("n", "<C-f>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc = '[A]ttach to harpoon list' })
+vim.keymap.set("n", "<C-f>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Open Harpoon list' })
 
-vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end, { desc = 'Open Harpoon file 1' })
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end, { desc = 'Open Harpoon file 2' })
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end, { desc = 'Open Harpoon file 3' })
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end, { desc = 'Open Harpoon file 4' })
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
