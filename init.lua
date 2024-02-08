@@ -405,6 +405,13 @@ vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[V]oid [C]hange' })
 -- Yank to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' })
 
+-- Create jsdoc-style comments
+vim.keymap.set('n', 'gjl', '^C/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment' })
+vim.keymap.set('v', 'gjl', 'c/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment' })
+
+vim.keymap.set('n', 'gjb', '^DO/**<CR> * <CR> */<Esc>kp', { desc = '[J]sdoc [B]lock comment' })
+vim.keymap.set('v', 'gjb', 'dO/**<CR> * <CR> */<Esc>kp', { desc = '[J]sdoc [B]lock comment' })
+
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
   return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
@@ -635,7 +642,9 @@ require('which-key').register {
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>v'] = { name = '[V]oid', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['gj'] = { name = '[J]sdoc comment', _ = 'which_key_ignore' },
 }
+
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
 require('which-key').register({
@@ -654,16 +663,21 @@ vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end, { desc = '
 vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end, { desc = 'Open Harpoon file 4' })
 
 -- [[Configure Trouble]]
-vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "Trouble Toggle" })
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end,
+  { desc = "Trouble [W]orkspace diagnostics" })
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end,
+  { desc = "Trouble [D]ocument diagnostics" })
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end, { desc = "Trouble [Q]uickfix" })
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end, { desc = "Trouble [L]oclist" })
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end,
+  { desc = "Trouble LSP [R]eferences" })
 
 -- [[Configure Todo-Comments]]
 vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next [T]odo comment" })
 vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous [T]odo comment" })
+
+-- TODO: Add TodoList keymaps
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
