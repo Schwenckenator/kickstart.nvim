@@ -320,6 +320,20 @@ require('lazy').setup({
       },
     },
   },
+  -- Undo tree
+  {
+    'mbbill/undotree',
+  },
+  -- Autopairs and auto closing tags
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    config = true,
+  },
 
 }, {})
 
@@ -500,6 +514,7 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
@@ -510,6 +525,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sR', require('telescope.builtin').lsp_references, { desc = '[S]earch [R]eferences' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -677,7 +693,10 @@ vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references")
 vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next [T]odo comment" })
 vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous [T]odo comment" })
 
--- TODO: Add TodoList keymaps
+vim.keymap.set("n", "<leader>xt", ":TodoTrouble<CR>", { desc = "Trouble [T]odo list" })
+
+-- [[Configure Undo-tree]]
+vim.keymap.set("n", "<leader>tu", vim.cmd.UndoTreeToggle, { desc = "[T]oggle [U]ndotree" })
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
