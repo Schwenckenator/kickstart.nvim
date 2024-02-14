@@ -431,8 +431,8 @@ local function indentOnEmpty(defaultMap)
   return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
 end
 
-vim.keymap.set('n', 'i', function() return indentOnEmpty('i') end, { expr = true, noremap = true })
-vim.keymap.set('n', 'a', function() return indentOnEmpty('a') end, { expr = true, noremap = true })
+vim.keymap.set('n', 'i', function() return indentOnEmpty('i') end, { expr = true, noremap = true, desc = "[I]nsert" })
+vim.keymap.set('n', 'a', function() return indentOnEmpty('a') end, { expr = true, noremap = true, desc = "[A]ppend" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -667,6 +667,8 @@ require('which-key').register({
   ['<leader>'] = { name = 'VISUAL <leader>' },
   ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
+
+vim.keymap.set("n", "?", ":WhichKey<CR>", { desc = 'Display WhichKey' })
 
 -- [[Configure Harpoon]]
 local harpoon = require('harpoon')
