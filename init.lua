@@ -419,12 +419,14 @@ vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[V]oid [C]hange' })
 -- Yank to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' })
 
+
 -- Create jsdoc-style comments
-vim.keymap.set('n', 'gjl', '^C/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment' })
+vim.keymap.set('n', 'gjl', 'o/**  */<Esc>2hi', { desc = '[J]sdoc [L]ine comment below' })
+vim.keymap.set('n', 'gjL', 'O/**  */<Esc>2hi', { desc = '[J]sdoc [L]ine comment above' })
 vim.keymap.set('v', 'gjl', 'c/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment' })
 
-vim.keymap.set('n', 'gjb', '^DO/**<CR> * <CR> */<Esc>kp', { desc = '[J]sdoc [B]lock comment' })
-vim.keymap.set('v', 'gjb', 'dO/**<CR> * <CR> */<Esc>kp', { desc = '[J]sdoc [B]lock comment' })
+vim.keymap.set('n', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
+vim.keymap.set('v', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
@@ -698,7 +700,7 @@ vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, {
 vim.keymap.set("n", "<leader>xt", ":TodoTrouble<CR>", { desc = "Trouble [T]odo list" })
 
 -- [[Configure Undo-tree]]
-vim.keymap.set("n", "<leader>tu", vim.cmd.UndoTreeToggle, { desc = "[T]oggle [U]ndotree" })
+vim.keymap.set("n", "<leader>tu", vim.cmd.UndotreeToggle, { desc = "[T]oggle [U]ndotree" })
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
@@ -717,7 +719,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
 
   -- React / Svelte
   tsserver = {},
