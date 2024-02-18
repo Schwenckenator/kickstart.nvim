@@ -39,6 +39,16 @@ return {
         local client = vim.lsp.get_client_by_id(client_id)
         local bufnr = args.buf
 
+        -- Run fixes with eslint
+        -- if client.name == 'eslint' then
+        --   vim.api.nvim_create_autocmd('BufWritePre', {
+        --     buffer = bufnr,
+        --     command = "EsLintFixAll",
+        --     group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {})
+        --   })
+        --   return
+        -- end
+
         -- Only attach to clients that support document formatting
         if not client.server_capabilities.documentFormattingProvider then
           return
@@ -49,6 +59,7 @@ return {
         if client.name == 'tsserver' then
           return
         end
+
 
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
