@@ -394,6 +394,10 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Save shortcut
+vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = '[S]ave file' })
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>', { desc = '[S]ave file' })
+
 -- Worst place in the world??
 vim.keymap.set("n", "Q", "<nop>")
 
@@ -417,7 +421,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>vd', '"_d', { desc = '[V]oid [D]elete' })
 vim.keymap.set({ 'n', 'v' }, '<leader>vc', '"_c', { desc = '[V]oid [C]hange' })
 
 -- Yank to system clipboard
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = '[Y]ank to clipboard' })
+
+-- Paste from system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = '[P]aste after from clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P', { desc = '[P]aste before from clipboard' })
 
 
 -- Create jsdoc-style comments
