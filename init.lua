@@ -395,8 +395,10 @@ vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Save shortcut
-vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = '[S]ave file' })
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>', { desc = '[S]ave file' })
+vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
+
+-- Open file explorer
+vim.keymap.set('n', '<leader>fe', vim.cmd.Ex, { desc = '[F]ile [E]xplorer' })
 
 -- Worst place in the world??
 vim.keymap.set("n", "Q", "<nop>")
