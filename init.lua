@@ -209,14 +209,16 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
+      extensions = { 'oil' },
     },
   },
 
@@ -335,6 +337,17 @@ require('lazy').setup({
     config = true,
   },
 
+  -- Oil file explorer
+  {
+    'stevearc/oil.nvim',
+    opts = {
+      view_options = {
+        show_hidden = true
+      }
+    },
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -394,11 +407,6 @@ vim.o.termguicolors = true
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- Save shortcut
-vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
-
--- Open file explorer
-vim.keymap.set('n', '<leader>fe', vim.cmd.Ex, { desc = '[F]ile [E]xplorer' })
 
 -- Worst place in the world??
 vim.keymap.set("n", "Q", "<nop>")
@@ -438,6 +446,16 @@ vim.keymap.set('v', 'gjl', 'c/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment'
 
 vim.keymap.set('n', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
 vim.keymap.set('v', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
+
+-- File Keymaps
+vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
+vim.keymap.set('n', '<leader>fS', vim.cmd.wa, { desc = '[F]ile [S]ave all' })
+
+vim.keymap.set('n', '<leader>fe', "<CMD>Oil<CR>", { desc = '[F]ile [E]xplorer' })
+
+vim.keymap.set('n', '<leader>fr', "<CMD>w<CR><CMD>e<CR>", { desc = '[F]ile [R]eload' })
+vim.keymap.set('n', '<leader>fR', "<CMD>e!<CR>", { desc = '[F]ile force [R]eload' })
+
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
@@ -664,14 +682,15 @@ end
 require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+  ['gj'] = { name = '[J]sdoc comment', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>v'] = { name = '[V]oid', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['gj'] = { name = '[J]sdoc comment', _ = 'which_key_ignore' },
 }
 
 -- register which-key VISUAL mode
@@ -737,6 +756,7 @@ local servers = {
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   eslint = {},
   svelte = {},
+  -- prettier = {},
 
   lua_ls = {
     Lua = {
