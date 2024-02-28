@@ -705,12 +705,12 @@ vim.keymap.set("n", "?", ":WhichKey<CR>", { desc = 'Display WhichKey' })
 -- [[Configure Harpoon]]
 local harpoon = require('harpoon')
 vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc = '[A]ttach to harpoon list' })
-vim.keymap.set("n", "<C-f>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Open Harpoon list' })
+vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Open Harpoon list' })
 
-vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end, { desc = 'Open Harpoon file 1' })
-vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end, { desc = 'Open Harpoon file 2' })
-vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end, { desc = 'Open Harpoon file 3' })
-vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end, { desc = 'Open Harpoon file 4' })
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end, { desc = 'Open Harpoon file 1' })
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end, { desc = 'Open Harpoon file 2' })
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(3) end, { desc = 'Open Harpoon file 3' })
+vim.keymap.set("n", "<C-;>", function() harpoon:list():select(4) end, { desc = 'Open Harpoon file 4' })
 
 -- [[Configure Trouble]]
 vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "Trouble Toggle" })
