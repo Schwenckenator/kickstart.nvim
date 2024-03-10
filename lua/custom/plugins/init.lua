@@ -86,9 +86,9 @@ return {
       vim.keymap.set('n', '<leader>a', function()
         harpoon:list():append()
       end, { desc = '[A]ttach to harpoon list' })
-      vim.keymap.set('n', '<C-h>', function()
+      vim.keymap.set('n', '<leader><space>', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
-      end, { desc = 'Open [H]arpoon list' })
+      end, { desc = '[ ] Open Harpoon list' })
 
       vim.keymap.set('n', '<leader>1', function()
         harpoon:list():select(1)
@@ -149,14 +149,17 @@ return {
   -- Undo tree
   {
     'mbbill/undotree',
+    config = function()
+      vim.keymap.set('n', '<leader>tu', '<CMD>UndotreeToggle<CR>', { desc = '[T]oggle [U]ndotree' })
+    end,
   },
 
   -- Autopairs and auto closing tags
-  -- {
-  --   'windwp/nvim-autopairs',
-  --   event = 'InsertEnter',
-  --   opts = {},
-  -- },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    opts = {},
+  },
 
   {
     'windwp/nvim-ts-autotag',
