@@ -48,8 +48,8 @@ vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload
 
 -- Code Keymaps
 vim.keymap.set('n', '<leader>cx', '<CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x]' })
-vim.keymap.set('n', '<leader>ci', '<CMD>TSToolsAddMissingImports<CR>', { desc = '[C]ode Fi[x]' })
-vim.keymap.set('n', '<leader>cr', '<CMD>TSToolsRemoveUnusedImports<CR>', { desc = '[C]ode Fi[x]' })
+vim.keymap.set('n', '<leader>cia', '<CMD>TSToolsAddMissingImports<CR>', { desc = '[C]ode [I]mport [A]dd' })
+vim.keymap.set('n', '<leader>cir', '<CMD>TSToolsRemoveUnusedImports<CR>', { desc = '[C]ode [I]mport [R]emove' })
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
