@@ -47,7 +47,7 @@ vim.keymap.set('n', '<leader>fr', '<CMD>w<CR><CMD>e<CR>', { desc = '[F]ile [R]el
 vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload' })
 
 -- Code Keymaps
-vim.keymap.set('n', '<leader>cx', '<CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x]' })
+vim.keymap.set('n', '<leader>cx', '<CMD>TSToolsAddMissingImports<CR><CMD>TSToolsRemoveUnusedImports<CR><CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x]' })
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
