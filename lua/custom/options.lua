@@ -1,2 +1,6 @@
--- Always insert spaces
-vim.opt.expandtab = true
+-- Be smart about tabs
+vim.opt.smarttab = true
+vim.opt.smartindent = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
