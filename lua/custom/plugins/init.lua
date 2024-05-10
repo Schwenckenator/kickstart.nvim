@@ -52,6 +52,9 @@ return {
               newfile = '[New]', -- Text to show for newly created file before first write
             },
           },
+          {
+            'grapple',
+          },
         },
       },
       extensions = { 'oil' },
@@ -76,33 +79,55 @@ return {
     },
   },
   -- Harpoon, tag main files for easy opening
-  {
-    'ThePrimeagen/harpoon',
-    name = 'harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local harpoon = require 'harpoon'
-      vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():append()
-      end, { desc = '[A]ttach to harpoon list' })
-      vim.keymap.set('n', '<leader><space>', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end, { desc = '[ ] Open Harpoon list' })
+  -- {
+  --   'ThePrimeagen/harpoon',
+  --   name = 'harpoon',
+  --   branch = 'harpoon2',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   config = function()
+  --     local harpoon = require 'harpoon'
+  --     vim.keymap.set('n', '<leader>a', function()
+  --       harpoon:list():append()
+  --     end, { desc = '[A]ttach to harpoon list' })
+  --     vim.keymap.set('n', '<leader><space>', function()
+  --       harpoon.ui:toggle_quick_menu(harpoon:list())
+  --     end, { desc = '[ ] Open Harpoon list' })
+  --
+  --     vim.keymap.set('n', '<leader>1', function()
+  --       harpoon:list():select(1)
+  --     end, { desc = 'Open Harpoon file 1' })
+  --     vim.keymap.set('n', '<leader>2', function()
+  --       harpoon:list():select(2)
+  --     end, { desc = 'Open Harpoon file 2' })
+  --     vim.keymap.set('n', '<leader>3', function()
+  --       harpoon:list():select(3)
+  --     end, { desc = 'Open Harpoon file 3' })
+  --     vim.keymap.set('n', '<leader>4', function()
+  --       harpoon:list():select(4)
+  --     end, { desc = 'Open Harpoon file 4' })
+  --   end,
+  -- },
 
-      vim.keymap.set('n', '<leader>1', function()
-        harpoon:list():select(1)
-      end, { desc = 'Open Harpoon file 1' })
-      vim.keymap.set('n', '<leader>2', function()
-        harpoon:list():select(2)
-      end, { desc = 'Open Harpoon file 2' })
-      vim.keymap.set('n', '<leader>3', function()
-        harpoon:list():select(3)
-      end, { desc = 'Open Harpoon file 3' })
-      vim.keymap.set('n', '<leader>4', function()
-        harpoon:list():select(4)
-      end, { desc = 'Open Harpoon file 4' })
-    end,
+  -- Grapple, tag main files for easy opening
+  {
+    'cbochs/grapple.nvim',
+    dependencies = {
+      { 'nvim-tree/nvim-web-devicons', lazy = true },
+    },
+    opts = {
+      scope = 'git',
+    },
+    event = { 'BufReadPost', 'BufNewFile' },
+    cmd = 'Grapple',
+    keys = {
+      { '<leader>a', '<CMD>Grapple tag<CR>', desc = '[A]dd Tag' },
+      { '<leader>r', '<CMD>Grapple untag<CR>', desc = '[R]emove Tag' },
+      { '<leader>m', '<CMD>Grapple toggle_tags<CR>', desc = 'Toggle Tags [m]enu' },
+      { '<leader>1', '<CMD>Grapple select index=1<CR>', desc = 'Select Tag [1]' },
+      { '<leader>2', '<CMD>Grapple select index=2<CR>', desc = 'Select Tag [2]' },
+      { '<leader>3', '<CMD>Grapple select index=3<CR>', desc = 'Select Tag [3]' },
+      { '<leader>4', '<CMD>Grapple select index=4<CR>', desc = 'Select Tag [4]' },
+    },
   },
 
   -- Lazygit, run lazygit in neovim
