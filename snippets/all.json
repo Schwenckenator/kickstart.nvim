@@ -1,0 +1,7 @@
+{
+	"foo": {
+		"prefix": "foo",
+		"body": "bar",
+		"description": "foobar"
+	}
+}

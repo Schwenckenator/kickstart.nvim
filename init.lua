@@ -722,6 +722,30 @@ require('lazy').setup {
           end
           return 'make install_jsregexp'
         end)(),
+        -- dependencies = {
+        --   -- If you want to add a bunch of pre-configured snippets,
+        --   --    you can use this plugin to help you. It even has snippets
+        --   --    for various frameworks/libraries/etc. but you will have to
+        --   --    set up the ones that are useful for you.
+        --   'rafamadriz/friendly-snippets',
+        -- },
+        config = function()
+          -- Load snippets
+          require('luasnip.loaders.from_vscode').lazy_load()
+          -- Load custom snippets
+          require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim' }
+
+          -- local ls = require 'luasnip'
+          --
+          -- ls.add_snippets(nil, {
+          --   all = {
+          --     -- Available in any filetype
+          --     ls.parser.parse_snippet('expand', '-- this is what was expanded!'),
+          --     -- Available in any filetype
+          --     ls.parser.parse_snippet('foo', '-- bar'),
+          --   },
+          -- })
+        end,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -730,12 +754,6 @@ require('lazy').setup {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-
-      -- If you want to add a bunch of pre-configured snippets,
-      --    you can use this plugin to help you. It even has snippets
-      --    for various frameworks/libraries/etc. but you will have to
-      --    set up the ones that are useful for you.
-      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
@@ -836,7 +854,7 @@ require('lazy').setup {
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -957,6 +975,11 @@ require('lazy').setup {
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 }
+
+-- -- Load snippets
+-- require('luasnip.loaders.from_vscode').lazy_load()
+-- -- Load custom snippets
+-- require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim' }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
