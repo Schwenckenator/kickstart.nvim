@@ -208,11 +208,4 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     opts = {},
   },
-  {
-    'ggandor/leap.nvim',
-    dependencies = { 'tpope/vim-repeat' },
-    config = function()
-      require('leap').create_default_mappings()
-    end,
-  },
 }

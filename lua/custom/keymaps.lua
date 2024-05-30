@@ -62,3 +62,45 @@ end, { expr = true, noremap = true, desc = '[I]nsert' })
 vim.keymap.set('n', 'a', function()
   return indentOnEmpty 'a'
 end, { expr = true, noremap = true, desc = '[A]ppend' })
+
+local function surround(lhs, rhs)
+  local mode = vim.api.nvim_get_mode()
+  if mode.mode == 'v' then
+    return '"sc' .. lhs .. rhs .. '<Esc>"sP'
+  elseif mode.mode == 'V' then
+    return '"sc' .. lhs .. '<CR>' .. rhs .. '<Esc>"sPvi' .. lhs .. '>'
+  else
+    print 'block surround'
+    return '"sc' .. lhs .. rhs .. '<Esc>"sP'
+  end
+end
+
+local surroundList = {
+  { lhs = '(', rhs = ')' },
+  { lhs = '[', rhs = ']' },
+  { lhs = '{', rhs = '}' },
+  { lhs = '<', rhs = '>' },
+  { surr = "'" },
+  { surr = '"' },
+  { surr = '`' },
+}
+
+for key, value in pairs(surroundList) do
+  if value['lhs'] ~= nil and value['rhs'] ~= nil then
+    local lhs = value['lhs']
+    local rhs = value['rhs']
+
+    vim.keymap.set('v', 's' .. lhs, function()
+      return surround(lhs, rhs)
+    end, { expr = true, noremap = true, desc = '[S]urround with ' .. lhs .. rhs })
+    vim.keymap.set('v', 's' .. rhs, function()
+      return surround(lhs, rhs)
+    end, { expr = true, noremap = true, desc = '[S]urround with ' .. lhs .. rhs })
+  end
+  if value['surr'] ~= nil then
+    local surr = value['surr']
+    vim.keymap.set('v', 's' .. surr, function()
+      return surround(surr, surr)
+    end, { expr = true, noremap = true, desc = '[S]urround with ' .. surr .. surr })
+  end
+end

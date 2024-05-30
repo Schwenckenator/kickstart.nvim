@@ -1,5 +1,5 @@
 {
-	"name": "schwenckenator-snippets",
+    "name": "schwenckenator-snippets",
     "engines": {
         "vscode": "^1.11.0"
     },
@@ -11,7 +11,11 @@
 			},
 			{
 				"language": ["typescriptreact"],
-				"path": "./snippets/react.json"
+				"path": "./snippets/react-tsx.json"
+			},
+			{
+				"language": ["typescript", "typescriptreact"],
+				"path": "./snippets/react-ts.json"
 			}
 		]
 	}
