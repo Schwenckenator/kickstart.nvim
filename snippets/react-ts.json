@@ -2,11 +2,23 @@
 	"reactCustomHook": {
 		"prefix": "rh",
 		"body": [
-			"export default function ${TM_FILENAME_BASE} {",
+			"/**\n * $1\n */\n",
+			"export default function ${TM_FILENAME_BASE}() {",
 			"  $0",
 			"}\n"
 		],
-		"description": "Creates a custom hook"
+		"description": "Creates a custom hook without props"
+	},
+	"reactCustomHookWithProps": {
+		"prefix": "rhp",
+		"body": [
+			"type IProps = {\n${2://TODO}\n\n}",
+			"/**\n * ${1:TODO}\n */\n",
+			"export default function ${TM_FILENAME_BASE}(props: IProps) {",
+			"  $0",
+			"}\n\n"
+		],
+		"description": "Creates a custom hook with props"
 	},
 	"reactUseEffect": {
 		"prefix": "ue",
@@ -16,5 +28,18 @@
 			"}, [$1])\n"
 		],
 		"description": "React useEffect hook"
+	},
+	"nextLayoutComponent": {
+		"prefix": "rnlc",
+		"body": [
+			"import { FC } from 'react'\n",
+			"import { ILayoutProps } from '@/11_types/PageType'\n",
+			"/**\n * ${2:TODO}\n */",
+			"const $1Layout: FC<ILayoutProps> = (props) => {",
+			"  return <$1LayoutMain {...props} />",
+			"}\n",
+			"export default $1Layout"
+		],
+		"description": "Creates a nextjs layout component"
 	}
 }
