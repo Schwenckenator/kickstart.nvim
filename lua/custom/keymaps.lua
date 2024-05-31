@@ -9,6 +9,17 @@ vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = '1/2 page down' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = '1/2 page up' })
 
+-- Centre page on search jumps
+vim.keymap.set('n', 'n', 'nzz', { desc = '[N]ext search' })
+vim.keymap.set('n', 'N', 'Nzz', { desc = '[N] previous search' })
+
+-- Move lines up and down
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = '[J] Move line down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = '[K] Move line up' })
+
+-- Join lines without moving cursor
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = '[J]oin line' })
+
 -- Delete to void (don't cut)
 vim.keymap.set({ 'n', 'v' }, '_d', '"_d', { desc = '[_] Void [D]elete' })
 vim.keymap.set({ 'n', 'v' }, '_D', '"_D', { desc = '[_] Void [D]elete' })
@@ -33,6 +44,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>)', '"0P', { desc = 'Paste yank [0]' })
 vim.keymap.set('n', 'gjl', 'o/**  */<Esc>2hi', { desc = '[J]sdoc [L]ine comment below' })
 vim.keymap.set('n', 'gjL', 'O/**  */<Esc>2hi', { desc = '[J]sdoc [L]ine comment above' })
 vim.keymap.set('v', 'gjl', 'c/**  */<Esc>2hP', { desc = '[J]sdoc [L]ine comment' })
+
+vim.keymap.set('n', 'gjr', '0"jC{/**  */}<Esc>3h"jP', { desc = '[J]s [R]eact comment' })
+vim.keymap.set('v', 'gjr', '"jc{/**  */}<Esc>3h"jP', { desc = '[J]s [R]eact comment' })
 
 vim.keymap.set('n', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
 vim.keymap.set('v', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
