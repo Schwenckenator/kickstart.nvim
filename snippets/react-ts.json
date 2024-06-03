@@ -2,7 +2,7 @@
 	"reactCustomHook": {
 		"prefix": "rh",
 		"body": [
-			"/**\n * $1\n */\n",
+			"/**\n * $1\n */",
 			"export default function ${TM_FILENAME_BASE}() {",
 			"  $0",
 			"}\n"
@@ -13,7 +13,7 @@
 		"prefix": "rhp",
 		"body": [
 			"type IProps = {\n${2://TODO}\n\n}",
-			"/**\n * ${1:TODO}\n */\n",
+			"/**\n * ${1:TODO}\n */",
 			"export default function ${TM_FILENAME_BASE}(props: IProps) {",
 			"  $0",
 			"}\n\n"
@@ -29,17 +29,40 @@
 		],
 		"description": "React useEffect hook"
 	},
-	"nextLayoutComponent": {
-		"prefix": "rnlc",
+	"playwrightTest": {
+		"prefix": "pt",
 		"body": [
-			"import { FC } from 'react'\n",
-			"import { ILayoutProps } from '@/11_types/PageType'\n",
-			"/**\n * ${2:TODO}\n */",
-			"const $1Layout: FC<ILayoutProps> = (props) => {",
-			"  return <$1LayoutMain {...props} />",
-			"}\n",
-			"export default $1Layout"
+			"test('$1', async ({$2}) => {",
+			"  $0",
+			"})"
 		],
-		"description": "Creates a nextjs layout component"
+		"description": "Playwright Test case"
+	},
+	"playwrightDescribe": {
+		"prefix": "pd",
+		"body": [
+			"test.describe('$1', () => {",
+			"  $0",
+			"})"
+		],
+		"description": "Playwright Describe"
+	},
+	"playwrightBeforeEach": {
+		"prefix": "pbe",
+		"body": [
+			"test.beforeEach(async ({$1}) => {",
+			"  $0",
+			"})"
+		],
+		"description": "Playwright BeforeEach hook"
+	},
+	"playwrightAfterEach": {
+		"prefix": "pae",
+		"body": [
+			"test.afterEach(async ({$1}) => {",
+			"  $0",
+			"})"
+		],
+		"description": "Playwright AfterEach hook"
 	}
 }
