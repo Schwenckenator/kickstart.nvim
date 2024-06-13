@@ -208,4 +208,9 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     opts = {},
   },
+  {
+    'tris203/precognition.nvim',
+    event = 'VeryLazy',
+    config = {},
+  },
 }
