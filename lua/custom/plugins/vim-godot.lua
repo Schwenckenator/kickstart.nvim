@@ -1,6 +1,4 @@
 return {
-  {
-    'habamax/vim-godot',
-    event = 'VimEnter',
-  },
+  'habamax/vim-godot',
+  event = 'VimEnter',
 }
