@@ -56,6 +56,7 @@ vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
 vim.keymap.set('n', '<leader>fS', vim.cmd.wa, { desc = '[F]ile [S]ave all' })
 
 vim.keymap.set('n', '<leader>fe', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
 
 vim.keymap.set('n', '<leader>fr', '<CMD>w<CR><CMD>e<CR>', { desc = '[F]ile [R]eload' })
 vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload' })

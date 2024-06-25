@@ -592,6 +592,16 @@ require('lazy').setup {
               callback = vim.lsp.buf.clear_references,
             })
           end
+          -- The following autocommand is used to enable inlay hints in your
+          -- code, if the language server you are using supports them
+          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            map('<leader>th', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end, '[T]oggle Inlay [H]ints')
+
+            -- enable by default
+            vim.lsp.inlay_hint.enable()
+          end
         end,
       })
 
