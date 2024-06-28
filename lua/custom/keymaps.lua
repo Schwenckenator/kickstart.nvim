@@ -52,14 +52,14 @@ vim.keymap.set('n', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock co
 vim.keymap.set('v', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
 
 -- File Keymaps
-vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
-vim.keymap.set('n', '<leader>fS', vim.cmd.wa, { desc = '[F]ile [S]ave all' })
+-- vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
+-- vim.keymap.set('n', '<leader>fS', vim.cmd.wa, { desc = '[F]ile [S]ave all' })
 
-vim.keymap.set('n', '<leader>fe', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
+-- vim.keymap.set('n', '<leader>fe', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'File Explorer' })
 
-vim.keymap.set('n', '<leader>fr', '<CMD>w<CR><CMD>e<CR>', { desc = '[F]ile [R]eload' })
-vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload' })
+-- vim.keymap.set('n', '<leader>fr', '<CMD>w<CR><CMD>e<CR>', { desc = '[F]ile [R]eload' })
+-- vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload' })
 
 -- Code Keymaps
 vim.keymap.set('n', '<leader>cx', '<CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x]' })
