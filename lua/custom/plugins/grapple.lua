@@ -4,7 +4,7 @@ return {
     { 'nvim-tree/nvim-web-devicons', lazy = true },
   },
   opts = {
-    scope = 'git',
+    scope = 'git_branch',
   },
   event = { 'BufReadPost', 'BufNewFile' },
   cmd = 'Grapple',
