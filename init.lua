@@ -342,7 +342,7 @@ require('lazy').setup {
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
-      vim.keymap.set('n', '?', '<CMD>WhichKey<CR>', { desc = 'Display WhichKey' })
+      vim.keymap.set('n', '<leader>?', '<CMD>WhichKey<CR>', { desc = 'Display WhichKey' })
 
       -- Document existing key chains
       require('which-key').register {
@@ -447,8 +447,9 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing [B]uffers' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', '<CMD>Telescope find_files hidden=true<CR>', { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', '<CMD>Telescope find_files<CR>', { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sF', '<CMD>Telescope find_files hidden=true no_ignore=true<CR>', { desc = '[S]earch [F]iles (No ignore)' })
+      vim.keymap.set('n', '<leader>st', '<CMD>TodoTelescope<CR>', { desc = '[S]earch [T]odos' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -597,6 +598,7 @@ require('lazy').setup {
               callback = vim.lsp.buf.clear_references,
             })
           end
+
           -- The following autocommand is used to enable inlay hints in your
           -- code, if the language server you are using supports them
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
@@ -720,6 +722,7 @@ require('lazy').setup {
         javascriptreact = { { 'prettierd', 'prettier' } },
         typescriptreact = { { 'prettierd', 'prettier' } },
         json = { { 'prettierd', 'prettier' } },
+        templ = { 'templ' },
       },
     },
   },
@@ -727,6 +730,8 @@ require('lazy').setup {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    lazy = false,
+    priority = 100,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
@@ -749,20 +754,7 @@ require('lazy').setup {
         -- },
         config = function()
           -- Load snippets
-          require('luasnip.loaders.from_vscode').lazy_load()
-          -- Load custom snippets
-          require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim' }
-
-          -- local ls = require 'luasnip'
-          --
-          -- ls.add_snippets(nil, {
-          --   all = {
-          --     -- Available in any filetype
-          --     ls.parser.parse_snippet('expand', '-- this is what was expanded!'),
-          --     -- Available in any filetype
-          --     ls.parser.parse_snippet('foo', '-- bar'),
-          --   },
-          -- })
+          require 'schwenckenator.config.luasnip'
         end,
       },
       'saadparwaiz1/cmp_luasnip',
@@ -786,7 +778,7 @@ require('lazy').setup {
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        -- completion = { completeopt = 'menu,menuone,noinsert' },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
@@ -831,6 +823,7 @@ require('lazy').setup {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          -- { name = 'buffer' },
         },
       }
     end,

@@ -17,6 +17,9 @@ vim.keymap.set('n', 'N', 'Nzz', { desc = '[N] previous search' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = '[J] Move line down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = '[K] Move line up' })
 
+-- vim.keymap.set('v', 'J', ":m '>+" .. vim.v.count + 1 .. '<CR>gv=gv', { desc = '[J] Move line down' })
+-- vim.keymap.set('v', 'K', ":m '<-" .. vim.v.count + 2 .. '<CR>gv=gv', { desc = '[K] Move line up' })
+
 -- Join lines without moving cursor
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = '[J]oin line' })
 
@@ -119,3 +122,5 @@ for key, value in pairs(surroundList) do
     end, { expr = true, noremap = true, desc = '[S]urround with ' .. surr .. surr })
   end
 end
+
+require 'schwenckenator.search'

@@ -1,58 +1,58 @@
 {
-	"reactFunctionComponentWithProps": {
-		"prefix": "rcwp",
-		"body": [
-			"import { FC } from 'react'\n",
-			"type IProps = {\n//TODO\n\n}",
-			"/**\n * TODO\n */\n",
-			"const ${TM_FILENAME_BASE}: FC<IProps> = (props) => {",
-			"  return null",
-			"}\n\n",
-			"export default ${TM_FILENAME_BASE}"
-		],
-		"description": "Creates a react component with props"
-	},
-	"reactFunctionComponentNoProps": {
-		"prefix": "rcnp",
-		"body": [
-			"import { FC } from 'react'\n\n",
-			"/**\n * TODO\n */\n",
-			"const ${TM_FILENAME_BASE}: FC = () => {",
-			"  return null",
-			"}\n\n",
-			"export default ${TM_FILENAME_BASE}"
-		],
-		"description": "Creates a react component with NO props"
-	},
-	"nextPageComponent": {
-		"prefix": "rnpc",
-		"body": [
-			"import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'",
-			"import { FC } from 'react'\n",
-			"import { IMetadataParams, IPageProps } from '@/11_types/PageType'\n",
-			"export async function generateMetadata({ params: { locale } }: IMetadataParams) {",
-			"  const t = await getTranslations({ locale, namespace: '$1Page.metadata' })\n",
-			"  return {\n    title: t('title'),\n  }",
-			"}\n",
-			"/**\n * ${2:TODO}\n */",
-			"const $1Page: FC<IPageProps> = (props) => {",
-			"  return <$1Main {...props} />",
-			"}\n",
-			"export default $1Page"
-		],
-		"description": "Creates a nextjs page component"
-	},
-	"nextLayoutComponent": {
-		"prefix": "rnlc",
-		"body": [
-			"import { FC } from 'react'\n",
-			"import { ILayoutProps } from '@/11_types/PageType'\n",
-			"/**\n * ${2:TODO}\n */",
-			"const $1Layout: FC<ILayoutProps> = (props) => {",
-			"  return <$1LayoutMain {...props} />",
-			"}\n",
-			"export default $1Layout"
-		],
-		"description": "Creates a nextjs layout component"
-	}
+  "reactFunctionComponentWithProps": {
+    "prefix": "rcwp",
+    "body": [
+      "import { FC } from 'react'\n",
+      "type IProps = {\n//TODO\n\n}",
+      "/**\n * TODO\n */\n",
+      "const ${TM_FILENAME_BASE}: FC<IProps> = (props) => {",
+      "  return null",
+      "}\n\n",
+      "export default ${TM_FILENAME_BASE}"
+    ],
+    "description": "Creates a react component with props"
+  },
+  "reactFunctionComponentNoProps": {
+    "prefix": "rcnp",
+    "body": [
+      "import { FC } from 'react'\n\n",
+      "/**\n * TODO\n */\n",
+      "const ${TM_FILENAME_BASE}: FC = () => {",
+      "  return null",
+      "}\n\n",
+      "export default ${TM_FILENAME_BASE}"
+    ],
+    "description": "Creates a react component with NO props"
+  },
+  "nextPageComponent": {
+    "prefix": "rnpc",
+    "body": [
+      "import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'",
+      "import { FC } from 'react'\n",
+      "import { IMetadataParams, IPageProps } from '@/11_types/PageType'\n",
+      "export async function generateMetadata({ params: { locale } }: IMetadataParams) {",
+      "  const t = await getTranslations({ locale, namespace: '$1Page.metadata' })\n",
+      "  return {\n    title: t('title'),\n  }",
+      "}\n",
+      "/**\n * ${2:TODO}\n */",
+      "const $1Page: FC<IPageProps> = (props) => {",
+      "  return <$1Main {...props} />",
+      "}\n",
+      "export default $1Page"
+    ],
+    "description": "Creates a nextjs page component"
+  },
+  "nextLayoutComponent": {
+    "prefix": "rnlc",
+    "body": [
+      "import { FC } from 'react'\n",
+      "import { ILayoutProps } from '@/11_types/PageType'\n",
+      "/**\n * ${2:TODO}\n */",
+      "const $1Layout: FC<ILayoutProps> = (props) => {",
+      "  return <$1LayoutMain {...props} />",
+      "}\n",
+      "export default $1Layout"
+    ],
+    "description": "Creates a nextjs layout component"
+  }
 }

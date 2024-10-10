@@ -1,0 +1,19 @@
+-- Obsidian Functionality in Neovim
+return {}
+-- return {
+--   'epwalsh/obsidian.nvim',
+--   lazy = true,
+--   ft = 'markdown',
+--   dependencies = {
+--     'nvim-lua/plenary.nvim',
+--   },
+--   opts = {
+--     ui = { enabled = false },
+--   },
+--   workspaces = {
+--     {
+--       name = 'Personal Notes',
+--       path = '~/Documents/Obsidian/"Personal Notes"',
+--     },
+--   },
+-- }

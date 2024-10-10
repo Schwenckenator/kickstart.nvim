@@ -1,6 +1,12 @@
+-- Highlighted comments
 -- TODO
 -- NOTE
+-- HACK
+-- WARN
 -- FIX
+-- PERF
+-- TEST
+--
 -- Comment highlighting
 return {
   'folke/todo-comments.nvim',

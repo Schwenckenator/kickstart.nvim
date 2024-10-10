@@ -1,7 +1,12 @@
 {
-	"foo": {
-		"prefix": "foo",
-		"body": "bar",
-		"description": "foobar"
-	}
+  "foo": {
+    "prefix": "foo",
+    "body": "foobar",
+    "description": "foobar"
+  },
+  "bar": {
+    "prefix": "bar",
+    "body": "barbaz",
+    "description": "add baz"
+  }
 }
