@@ -32,6 +32,50 @@ local filename = utils.filename
 return {
   s(
     {
+      name = 'React Function Component',
+      trig = 'rc',
+    },
+    fmta(
+      [[
+          import { FC } from 'react'
+
+          export type <file>Props = <props>
+
+
+          /**
+           * <doc>
+           */
+          const <file>: FC<<<file>Props>> = (props) =>> {
+            <cmp>
+          }
+
+          export default <file>
+        ]],
+      {
+        file = f(filename, {}),
+        doc = i(1, 'TODO DOC COMMENT'),
+        props = c(2, {
+          sn(nil, {
+            i(1, '/* TODO */'),
+            t { ' & {', '  ' },
+            i(2, '// TODO Props'),
+            t { '', '}' },
+          }),
+          sn(nil, {
+            t { '{', '  ' },
+            i(1, '// TODO Props'),
+            t { '', '}' },
+          }),
+          sn(nil, {
+            i(1, '/* TODO */'),
+          }),
+        }),
+        cmp = i(0),
+      }
+    )
+  ),
+  s(
+    {
       name = 'React Function Component with *NO* Props',
       trig = 'rcnp',
     },
@@ -57,38 +101,6 @@ return {
   ),
   s(
     {
-      name = 'React function component with Props',
-      trig = 'rcwp',
-      desc = 'Creates a react components with props',
-    },
-    fmta(
-      [[
-          import { FC } from 'react'
-
-          export type <file>Props = {
-            <type>
-          }
-
-
-          /**
-           * <doc>
-           */
-          const <file>: FC<<<file>Props>> = (props) =>> {
-            <cmp>
-          }
-
-          export default <file>
-        ]],
-      {
-        file = f(filename, {}),
-        type = i(1, '// TODO Props'),
-        doc = i(2, 'TODO DOC COMMENT'),
-        cmp = i(0),
-      }
-    )
-  ),
-  s(
-    {
       name = 'Next Page Component',
       trig = 'rnpc',
       desc = 'Creates a Nextjs Page Component',
@@ -101,7 +113,7 @@ return {
         import { IMetadataParams, IPageProps } from '@/11_types/PageType'
 
         export async function generateMetadata({ params: { locale } }: IMetadataParams) {
-          const t = await getTranslations({ locale, namespace: '$1Page.metadata' })
+          const t = await getTranslations({ locale, namespace: '<nameRep>Page.metadata' })
 
           return { 
             title: t('title'),
@@ -112,14 +124,18 @@ return {
          * <doc>のページコンポーネント 
          */
         const <name>Page: FC<<IPageProps>> = (props) =>> {
-          return <<<name>Main {...props} />>
+          unstable_setRequestLocale(props.params.locale)
+
+          <fin>return <<<nameRep>Main {...props} />>
         }
 
-        export default <name>Page
+        export default <nameRep>Page
       ]],
       {
         name = i(1),
+        nameRep = rep(1),
         doc = i(2, 'TODO DOC COMMENT'),
+        fin = i(0),
       }
     )
   ),
@@ -139,14 +155,16 @@ return {
          * <doc>のレイアウトコンポーネント
          */
         const <name>Layout: FC<<ILayoutProps>> = (props) =>> {
-          return <<<name>LayoutMain {...props} />>
+          <fin>return <<<nameRep>LayoutMain {...props} />>
         }
 
-        export default <name>Layout
+        export default <nameRep>Layout
       ]],
       {
         name = i(1),
+        nameRep = rep(1),
         doc = i(2, 'TODO DOC COMMENT'),
+        fin = i(0),
       }
     )
   ),

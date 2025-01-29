@@ -2,6 +2,39 @@
 -- My Custom Keymaps --
 -- ***************** --
 
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- TIP: Disable arrow keys in normal mode
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+-- Keybinds to make split navigation easier.
+--  Use CTRL+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
 -- Worst place in the world??
 vim.keymap.set('n', 'Q', '<nop>')
 
@@ -28,6 +61,7 @@ vim.keymap.set({ 'n', 'v' }, '_d', '"_d', { desc = '[_] Void [D]elete' })
 vim.keymap.set({ 'n', 'v' }, '_D', '"_D', { desc = '[_] Void [D]elete' })
 vim.keymap.set({ 'n', 'v' }, '_c', '"_c', { desc = '[_] Void [C]hange' })
 vim.keymap.set({ 'n', 'v' }, '_C', '"_C', { desc = '[_] Void [C]hange' })
+vim.keymap.set({ 'n', 'v' }, '_x', '"_x', { desc = '[_] Void [D]elete' })
 
 -- Yank to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to clipboard' })
@@ -69,9 +103,23 @@ vim.keymap.set('n', '<leader>cx', '<CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x
 vim.keymap.set('n', '<leader>cia', '<CMD>TSToolsAddMissingImports<CR>', { desc = '[C]ode [I]mport [A]dd' })
 vim.keymap.set('n', '<leader>cir', '<CMD>TSToolsRemoveUnusedImports<CR>', { desc = '[C]ode [I]mport [R]emove' })
 
+-- Toggle Case
+-- vim.keymap.set({ 'n', 'v' }, '<leader>ccc', '<CMD>s/[a-z]\\@<=[A-Z]/_\\l\0/g<CR>', { desc = '[C]ode [C]ase [C]amel' })
+-- vim.keymap.set('n', '<leader>ccs', '<CMD>s/[a-z]\\@<=[A-Z]/_\\l\0/g<CR>', { desc = '[C]ode [C]ase [S]nake' })
+-- vim.keymap.set('v', '<leader>ccs', "<CMD>'<,'>s/[a-z]\\@<=[A-Z]/_\\l\0/g<CR>", { desc = '[C]ode [C]ase [S]nake' })
+
+-- Reload config keymaps
+vim.keymap.set(
+  'n',
+  '<leader><leader>rs',
+  '<CMD>source ~/.config/nvim/lua/schwenckenator/config/luasnip.lua<CR>',
+  { desc = '[R]eload [S]nippets', noremap = true, silent = true }
+)
+
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
-  return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
+  -- return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
+  return string.match(vim.api.nvim_get_current_line(), '^%s*$') ~= nil and 'cc' or defaultMap
 end
 
 vim.keymap.set('n', 'i', function()
@@ -84,7 +132,7 @@ end, { expr = true, noremap = true, desc = '[A]ppend' })
 local function surround(lhs, rhs)
   local mode = vim.api.nvim_get_mode()
   if mode.mode == 'v' then
-    return '"sc' .. lhs .. rhs .. '<Esc>"sP'
+    return '"sc' .. lhs .. '<C-o>ms' .. rhs .. '<Esc>`s"sP'
   elseif mode.mode == 'V' then
     return '"sc' .. lhs .. '<CR>' .. rhs .. '<Esc>"sPvi' .. lhs .. '>'
   else
@@ -101,6 +149,13 @@ local surroundList = {
   { surr = "'" },
   { surr = '"' },
   { surr = '`' },
+  { surr = '_' },
+  { surr = '-' },
+  { surr = '*' },
+  { surr = '**' },
+  { surr = '=' },
+  { surr = '/' },
+  { surr = '|' },
 }
 
 for key, value in pairs(surroundList) do

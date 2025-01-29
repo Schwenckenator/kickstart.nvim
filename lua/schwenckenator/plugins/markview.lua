@@ -6,4 +6,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     'nvim-tree/nvim-web-devicons',
   },
+  config = function()
+    require 'schwenckenator.config.markview'
+  end,
 }

@@ -37,4 +37,25 @@ return {
   }, {
     d(1, utils.date, {}),
   }),
+  s(
+    {
+      name = 'Choice Test',
+      trig = 'testCn',
+      desc = 'Testing the choice node highlight',
+    },
+    fmta(
+      [[
+        <>
+        <>
+      ]],
+      {
+        i(1, 'insert'),
+        c(2, {
+          t 'choice 1',
+          t 'choice 2',
+          t 'choice 3',
+        }),
+      }
+    )
+  ),
 }

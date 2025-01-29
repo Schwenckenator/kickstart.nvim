@@ -32,6 +32,17 @@ utils.filename = function()
   return { vim.fn.expand '%:t:r' }
 end
 
+utils.filenameCapital = function()
+  local filename = vim.fn.expand '%:t:r'
+  return { filename:sub(1, 1):upper() .. filename:sub(2) }
+end
+
+utils.filenameFilter = function(args, parent, removeChars)
+  local filename = vim.fn.expand '%:t:r'
+  local fixed = filename:gsub(removeChars, '', 1)
+  return { fixed }
+end
+
 utils.date = function(args, state, fmt)
   local fmt = fmt or '%Y-%m-%d'
   return sn(nil, i(1, os.date(fmt)))
