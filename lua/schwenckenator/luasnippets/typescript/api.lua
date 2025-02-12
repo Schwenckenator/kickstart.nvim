@@ -35,6 +35,11 @@ return {
         }
 
         export default <filename>
+
+        export const testResponse<apiType>: I<apiType>Response = {
+          status: 'success',
+          <testData>
+        }
       ]],
       {
         filename = f(utils.filename, {}),
@@ -48,6 +53,7 @@ return {
           t 'patch',
           t 'delete',
         }),
+        testData = i(5),
       }
     )
   ),

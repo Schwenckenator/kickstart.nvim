@@ -89,14 +89,7 @@ vim.keymap.set('n', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock co
 vim.keymap.set('v', 'gjb', 'O/**<CR><CR>/<Esc>ka ', { desc = '[J]sdoc [B]lock comment' })
 
 -- File Keymaps
--- vim.keymap.set('n', '<leader>fs', vim.cmd.w, { desc = '[F]ile [S]ave' })
--- vim.keymap.set('n', '<leader>fS', vim.cmd.wa, { desc = '[F]ile [S]ave all' })
-
--- vim.keymap.set('n', '<leader>fe', '<CMD>Oil<CR>', { desc = '[F]ile [E]xplorer' })
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'File Explorer' })
-
--- vim.keymap.set('n', '<leader>fr', '<CMD>w<CR><CMD>e<CR>', { desc = '[F]ile [R]eload' })
--- vim.keymap.set('n', '<leader>fR', '<CMD>e!<CR>', { desc = '[F]ile force [R]eload' })
 
 -- Code Keymaps
 vim.keymap.set('n', '<leader>cx', '<CMD>EslintFixAll<CR>', { desc = '[C]ode Fi[x]' })
@@ -118,8 +111,9 @@ vim.keymap.set(
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
-  -- return string.match(vim.api.nvim_get_current_line(), '%g') == nil and 'cc' or defaultMap
-  return string.match(vim.api.nvim_get_current_line(), '^%s*$') ~= nil and 'cc' or defaultMap
+  -- `cc` copys blank line or spaces into yank register
+  -- send the blank spaces to the void with `"_cc`
+  return string.match(vim.api.nvim_get_current_line(), '^%s*$') ~= nil and '"_cc' or defaultMap
 end
 
 vim.keymap.set('n', 'i', function()
@@ -132,9 +126,9 @@ end, { expr = true, noremap = true, desc = '[A]ppend' })
 local function surround(lhs, rhs)
   local mode = vim.api.nvim_get_mode()
   if mode.mode == 'v' then
-    return '"sc' .. lhs .. '<C-o>ms' .. rhs .. '<Esc>`s"sP'
+    return '"sc' .. lhs .. rhs .. '<Esc>"sP'
   elseif mode.mode == 'V' then
-    return '"sc' .. lhs .. '<CR>' .. rhs .. '<Esc>"sPvi' .. lhs .. '>'
+    return '"sc' .. lhs .. '<CR>' .. rhs .. '<Esc>"sPV>'
   else
     print 'block surround'
     return '"sc' .. lhs .. rhs .. '<Esc>"sP'
@@ -152,13 +146,12 @@ local surroundList = {
   { surr = '_' },
   { surr = '-' },
   { surr = '*' },
-  { surr = '**' },
   { surr = '=' },
   { surr = '/' },
   { surr = '|' },
 }
 
-for key, value in pairs(surroundList) do
+for _, value in pairs(surroundList) do
   if value['lhs'] ~= nil and value['rhs'] ~= nil then
     local lhs = value['lhs']
     local rhs = value['rhs']
@@ -179,3 +172,5 @@ for key, value in pairs(surroundList) do
 end
 
 require 'schwenckenator.search'
+
+vim.keymap.set({ 'n', 't' }, '<leader>tt', '<CMD>Floaterminal<CR>')
