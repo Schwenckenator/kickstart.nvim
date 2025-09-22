@@ -66,7 +66,6 @@ require 'plugins.which-key'
 require 'plugins.conform'
 
 require 'plugins.treesitter'
-require 'plugins.mason'
 require 'plugins.lazydev'
 
 require('fidget').setup()

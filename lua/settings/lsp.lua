@@ -1,6 +1,29 @@
+local servers = {
+  'bash-language-server',
+  'css-lsp',
+  'eslint-lsp',
+  -- 'gopls',
+  'html-lsp',
+  'htmx-lsp',
+  'lua-language-server',
+  'python-lsp-server',
+  'rust-analyzer',
+  'svelte-language-server',
+}
+
+local formatters = {
+  'black',
+  'gdtoolkit', -- Linter and formatter for gdscript
+  'isort', -- Sorts python imports
+  'prettier', -- Formatter for Js/Ts
+  'stylua', -- Formatter for lua
+}
+
 -- This just enables the lsp
 -- The config for the lsp lives in the 'lsp' folder
-vim.lsp.enable 'lua_ls'
+for _, lsp in ipairs(servers) do
+  vim.lsp.enable(lsp)
+end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
@@ -52,6 +75,11 @@ vim.diagnostic.config {
   severity_sort = true,
   float = { border = 'rounded', source = 'if_many' },
   underline = { severity = vim.diagnostic.severity.ERROR },
+  jump = {
+    on_jump = function(diagnostic, bufnr)
+      vim.diagnostic.open_float { bufnr = bufnr, score = 'cursor', focus = false }
+    end,
+  },
   signs = vim.g.have_nerd_font and {
     text = {
       [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -83,3 +111,15 @@ require('typescript-tools').setup {
     },
   },
 }
+
+require('mason').setup()
+
+local ensure_installed = {}
+for _, e in ipairs(servers) do
+  table.insert(ensure_installed, e)
+end
+for _, e in ipairs(formatters) do
+  table.insert(ensure_installed, e)
+end
+
+require('mason-tool-installer').setup { ensure_installed = ensure_installed }
