@@ -24,8 +24,8 @@ require('markview').setup {
       --   style = 'label',
       -- },
     },
-  },
-  list_items = {
-    indent_size = 4,
+    list_items = {
+      indent_size = 4,
+    },
   },
 }

@@ -4,10 +4,14 @@ return {
   {
     'folke/lazydev.nvim',
     ft = 'lua',
+    dependencies = {
+      { 'gonstoll/wezterm-types', lazy = true },
+    },
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
         { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        { path = 'wezterm-types', mods = { 'wezterm' } },
       },
     },
   },

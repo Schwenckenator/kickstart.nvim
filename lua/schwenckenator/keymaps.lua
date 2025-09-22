@@ -104,10 +104,12 @@ vim.keymap.set('n', '<leader>cir', '<CMD>TSToolsRemoveUnusedImports<CR>', { desc
 -- Reload config keymaps
 vim.keymap.set(
   'n',
-  '<leader><leader>rs',
+  '<leader><leader>sr',
   '<CMD>source ~/.config/nvim/lua/schwenckenator/config/luasnip.lua<CR>',
-  { desc = '[R]eload [S]nippets', noremap = true, silent = true }
+  { desc = '[S]nippets [R]eload', noremap = true, silent = true }
 )
+
+vim.keymap.set('n', '<leader><leader>sd', '<CMD>lua require("luasnip").log.open()<CR>', { desc = '[S]nippets [D]ebug', noremap = true, silent = true })
 
 -- Insert/Append at current indent on empty lines
 local function indentOnEmpty(defaultMap)
