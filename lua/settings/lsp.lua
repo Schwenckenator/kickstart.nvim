@@ -123,3 +123,10 @@ for _, e in ipairs(formatters) do
 end
 
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+-- Setup godot LSP
+local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
+if gdproject then
+  io.close(gdproject)
+  vim.fn.serverstart './godothost'
+end
