@@ -1,28 +1,33 @@
 local servers = {
-  'bash-language-server',
-  'css-lsp',
-  'eslint-lsp',
-  -- 'gopls',
-  'html-lsp',
-  'htmx-lsp',
-  'lua-language-server',
-  'python-lsp-server',
-  'rust-analyzer',
-  'svelte-language-server',
-}
-
-local formatters = {
-  'black',
-  'gdtoolkit', -- Linter and formatter for gdscript
-  'isort', -- Sorts python imports
-  'prettier', -- Formatter for Js/Ts
-  'stylua', -- Formatter for lua
+  { lsp = 'bashls', pkg = 'bash-language-server' },
+  { lsp = 'cssls', pkg = 'css-lsp' },
+  { lsp = 'eslint', pkg = 'eslint-lsp' },
+  { lsp = 'gdscript', pkg = nil },
+  { lsp = 'gdshader_lsp', pkg = nil },
+  { lsp = 'html', pkg = 'html-lsp' },
+  { lsp = 'htmx', pkg = 'htmx-lsp' },
+  { lsp = 'lua_ls', pkg = 'lua-language-server' },
+  { lsp = 'pylsp', pkg = 'python-lsp-server' },
+  { lsp = 'rust_analyzer', pkg = 'rust-analyzer' },
+  { lsp = 'svelte', pkg = 'svelte-language-server' },
+  -- Python formatter
+  { lsp = nil, pkg = 'black' },
+  -- Linter and formatter for gdscript
+  { lsp = nil, pkg = 'gdtoolkit' },
+  -- Sorts python imports
+  { lsp = nil, pkg = 'isort' },
+  -- Formatter for Js/Ts
+  { lsp = nil, pkg = 'prettier' },
+  -- Formatter for lua
+  { lsp = nil, pkg = 'stylua' },
 }
 
 -- This just enables the lsp
 -- The config for the lsp lives in the 'lsp' folder
-for _, lsp in ipairs(servers) do
-  vim.lsp.enable(lsp)
+for _, server in ipairs(servers) do
+  if server.lsp then
+    vim.lsp.enable(server.lsp)
+  end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -115,11 +120,10 @@ require('typescript-tools').setup {
 require('mason').setup()
 
 local ensure_installed = {}
-for _, e in ipairs(servers) do
-  table.insert(ensure_installed, e)
-end
-for _, e in ipairs(formatters) do
-  table.insert(ensure_installed, e)
+for _, server in ipairs(servers) do
+  if server.pkg then
+    table.insert(ensure_installed, server.pkg)
+  end
 end
 
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
