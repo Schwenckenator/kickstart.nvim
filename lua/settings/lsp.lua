@@ -128,9 +128,28 @@ end
 
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
--- Setup godot LSP
-local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
-if gdproject then
-  io.close(gdproject)
-  vim.fn.serverstart './godothost'
+-- Setup godot lsp
+local dirs = { '' }
+local godot_project_path = ''
+local cwd = vim.fn.getcwd()
+
+-- Search each dir for a 'project.godot'
+for _, dir in ipairs(dirs) do
+  if vim.uv.fs_stat(cwd .. dir .. '/project.godot') then
+    godot_project_path = cwd .. dir
+  end
+end
+
+if godot_project_path == '' then
+  -- Didn't find a godot project
+  return false
+end
+
+-- Start server if not already running
+local godot_pipe_path = godot_project_path .. '/godot.pipe'
+
+if not vim.uv.fs_stat(godot_pipe_path) then
+  vim.fn.serverstart(godot_pipe_path)
+  -- Set global that we started the pipe
+  vim.g.godot_server_pipe_started = true
 end

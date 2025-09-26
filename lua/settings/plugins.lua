@@ -56,6 +56,27 @@ vim.pack.add {
   'https://github.com/tpope/vim-dadbod',
   'https://github.com/kristijanhusak/vim-dadbod-completion',
   'https://github.com/kristijanhusak/vim-dadbod-ui',
+
+  -- Godot quickstart (My plugin!!!)
+  -- 'https://github.com/Schwenckenator/godot-quickstart.nvim',
+
+  -- *****************************
+  -- Debug Adapter Protocol (DAP)
+  -- *****************************
+  -- DAP itself
+  'https://github.com/mfussenegger/nvim-dap',
+
+  -- Creates a beautiful debugger UI
+  'https://github.com/rcarriga/nvim-dap-ui',
+
+  -- Required dependency for nvim-dap-ui
+  'https://github.com/nvim-neotest/nvim-nio',
+
+  -- Installs the debug adapters for you
+  'https://github.com/jay-babu/mason-nvim-dap.nvim',
+
+  -- Add your own debuggers here
+  -- 'leoluz/nvim-dap-go',
 }
 
 -- Load plugins
@@ -83,3 +104,4 @@ require 'plugins.undotree'
 require 'plugins.grapple'
 
 require 'plugins.dadbod'
+require 'plugins.debug'
