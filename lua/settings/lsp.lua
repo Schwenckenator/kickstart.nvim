@@ -5,11 +5,12 @@ local servers = {
   { lsp = 'gdscript', pkg = nil },
   { lsp = 'gdshader_lsp', pkg = nil },
   { lsp = 'html', pkg = 'html-lsp' },
-  { lsp = 'htmx', pkg = 'htmx-lsp' },
+  -- { lsp = 'htmx', pkg = 'htmx-lsp' },
   { lsp = 'lua_ls', pkg = 'lua-language-server' },
   { lsp = 'pylsp', pkg = 'python-lsp-server' },
   { lsp = 'rust_analyzer', pkg = 'rust-analyzer' },
   { lsp = 'svelte', pkg = 'svelte-language-server' },
+  { lsp = 'tailwindcss', pkg = 'tailwindcss-language-server' },
   -- Python formatter
   { lsp = nil, pkg = 'black' },
   -- Linter and formatter for gdscript
@@ -70,6 +71,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
           buffer = ev.buf,
           callback = vim.lsp.buf.clear_references,
+        })
+      end
+
+      if client.name == 'typescript-tools' then
+        -- Add commands for typescript and similar files (current buffer only)
+        vim.keymap.set('n', '<leader>cx', '<CMD>TSToolsFixAll<CR>', {
+          desc = '[C]ommand Fi[x]',
+          buffer = true,
+        })
+        vim.keymap.set('n', '<leader>cia', '<CMD>TSToolsAddMissingImports<CR>', {
+          desc = '[C]ommand [I]mport [A]dd',
+          buffer = true,
+        })
+        vim.keymap.set('n', '<leader>cir', '<CMD>TSToolsRemoveUnusedImports<CR>', {
+          desc = '[C]ommand [I]mport [R]emove',
+          buffer = true,
         })
       end
     end

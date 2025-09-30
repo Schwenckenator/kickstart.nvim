@@ -21,6 +21,7 @@ require('conform').setup {
     typescriptreact = { 'prettierd', 'prettier' },
     json = { 'prettierd', 'prettier' },
     templ = { 'templ' },
+    gdscript = { 'gdformat' },
   },
 }
 
